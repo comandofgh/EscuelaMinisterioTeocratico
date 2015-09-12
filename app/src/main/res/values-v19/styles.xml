@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Base.AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="Divisor">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">@color/md_grey_400</item>
+        <item name="android:layout_marginBottom">13dp</item>
+        <item name="android:layout_marginRight">@dimen/scrollview_margen_izquierdo</item>
+    </style>
+
+    <style name="Sub_Divisor">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/md_grey_400</item>
+        <item name="android:layout_marginRight">@dimen/scrollview_margen_izquierdo</item>
+    </style>
+
+    <style name="Textview_Configuracion_header">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+        <item name="android:textColor">@color/md_secondary_text_icons</item>
+        <!--<item name="android:textColor">@color/md_grey_900</item>-->
+    </style>
+
+    <style name="Textview_Configuracion_opciones">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body2</item>
+        <item name="android:textColor">@color/md_text</item>
+        <item name="android:textSize">19sp</item>
+
+    </style>
+
+    <style name="Textview_Configuracion_subopciones">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+
+    </style>
+
+</resources>

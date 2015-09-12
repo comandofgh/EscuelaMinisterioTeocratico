@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Escuela Del Ministerio Teocratico</string>
+    <string name="action_settings">Acerca de Escuela Del Ministerio Teocratico</string>
+    <string name="hello_world">Hello world!></string>
+
+   <!--navigation drawer-->
+    <string name="estudiantes">Estudiantes</string>
+    <string name="programa">Programa</string>
+    <string name="calificacion">Calificación</string>
+    <string name="configuracion">Configuración</string>
+    <string name="backup">Backup</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="otros">Otros</string>
+    <string name="ayuda">Ayuda</string>
+    <string name="opinion">Danos tu opinió</string>
+
+   <!--header navigation drawer-->
+    <string name="titulillo_1">Desarrollador Android</string>
+    <string name="titulillo_2">comandofgh@gmail.com</string>
+
+    <!--//menu configuracion-->
+    <string name="title_activity_settings">Configuración</string>
+    <string name="general">GENERAL</string>
+    <string name="datos_congregacion">DATOS DE LA CONGREGACION</string>
+    <string name="nombre_congregacion">Nombre</string>
+    <string name="dia_reunion">Dia de reunión</string>
+    <string name="copia_seguridad">COPIA DE SEGURIDAD</string>
+    <string name="cuenta_google">Cuenta Google</string>
+    <string name="guardar_copia">Guardar Copia de seguridad en</string>
+    <string name="informacion_legal">INFORMACION LEGAL</string>
+    <string name="licencia">Licencia de fuente abierta</string>
+    <string name="condiciones">Condiciones de uso</string>
+    <string name="contrato">Contrato de licencia</string>
+    <string name="politica">Politica de privacidad</string>
+    <string name="aplicacion">APLICACIÓN</string>
+    <string name="version">Version</string>
+    <string name="copyright">Copyright</string>
+    <string name="idioma">Idioma</string>
+
+    <!--Fragment agregar estudiante-->
+    <string name="Nombre">Nombre</string>
+    <string name="Apellidos">Apellidos</string>
+    <string name="Sexo">Sexo:</string>
+    <string name="Hombre">Hombre</string>
+    <string name="Mujer">Mujer</string>
+
+    <string name="Cancelar">Cancelar</string>
+    <string name="Guardar">Guardar</string>
+
+</resources>

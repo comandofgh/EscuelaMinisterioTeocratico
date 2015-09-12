@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageViewContactos"
-        android:src="@drawable/estudiantes_black_36dp"
+        android:src="@drawable/ic_action_estudiantes"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/scrollview_margen_superior" />
 

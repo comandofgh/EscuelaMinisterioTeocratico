@@ -6,7 +6,7 @@
         <item
             android:checked="true"
             android:id="@+id/item_navigation_drawer_estudiantes"
-            android:icon="@drawable/estudiantes_black_36dp"
+            android:icon="@drawable/ic_action_estudiantes"
             android:title="@string/estudiantes" />
         <item
             android:id="@+id/item_navigation_drawer_programa"
@@ -14,7 +14,7 @@
             android:title="@string/programa" />
         <item
             android:id="@+id/item_navigation_drawer_calificacion"
-            android:icon="@drawable/calificar_black_36dp"
+            android:icon="@drawable/ic_action_calificar"
             android:title="@string/calificacion" />
     </group>
 
@@ -28,7 +28,7 @@
                     android:title="@string/configuracion" />
                 <item
                     android:id="@+id/item_navigation_drawer_backup"
-                    android:icon="@drawable/backup_black_36dp"
+                    android:icon="@drawable/ic_action_backup"
                     android:title="@string/backup" />
             </menu>
         </item>

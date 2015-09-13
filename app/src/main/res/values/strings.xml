@@ -38,13 +38,13 @@
     <string name="idioma">Idioma</string>
 
     <!--Fragment agregar estudiante-->
-    <string name="Nombre">Nombre</string>
-    <string name="Apellidos">Apellidos</string>
-    <string name="Sexo">Sexo:</string>
-    <string name="Hombre">Hombre</string>
-    <string name="Mujer">Mujer</string>
+    <string name="nombre">Nombre:</string>
+    <string name="apellidos">Apellidos:</string>
+    <string name="sexo">Sexo:</string>
+    <string name="hombre">Hombre</string>
+    <string name="mujer">Mujer</string>
 
-    <string name="Cancelar">Cancelar</string>
-    <string name="Guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="guardar">Guardar</string>
 
 </resources>

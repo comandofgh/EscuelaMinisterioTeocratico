@@ -1,5 +1,7 @@
 package com.example.coman.escuelaministerioteocratico;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -19,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBar actionBar;
-    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +113,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onAgregarEst(View view) {
-        //TODO:Capturar view de otra forma
+//      Obtiene la instancia del administrador de fragmentos
+        FragmentManager fragmentManager = getFragmentManager();
+
+//      Crear una nueva transacción
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+//      Crear un nuevo fragmento y añade
+        AgregaEstudiantesFragment fragment_agrega_est = new AgregaEstudiantesFragment();
+        transaction.add(R.id.contenedor, fragment_agrega_est);
+
+//      Confirmar el cambio
+        transaction.commit();
+
+//        TODO: usar manejo de metodo bajo demanta para reutilizar get
     }
 }

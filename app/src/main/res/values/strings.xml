@@ -38,6 +38,7 @@
     <string name="idioma">Idioma</string>
 
     <!--Fragment agregar estudiante-->
+ <string name="titulo_agregar_est">Agregar Estudiante</string>
     <string name="nombre">Nombre:</string>
     <string name="apellidos">Apellidos:</string>
     <string name="sexo">Sexo:</string>

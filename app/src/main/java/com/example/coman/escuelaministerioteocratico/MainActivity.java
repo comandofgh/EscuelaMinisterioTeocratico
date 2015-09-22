@@ -1,7 +1,6 @@
 package com.example.coman.escuelaministerioteocratico;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -113,19 +111,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onAgregarEst(View view) {
-//      Obtiene la instancia del administrador de fragmentos
-        FragmentManager fragmentManager = getFragmentManager();
 
-//      Crear una nueva transacción
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//      creamos instancia de AgregarEstudiantesFragment()
+        DialogFragment newFragment = new AgregarEstudiantesFragment();
+//      mostramos
+        newFragment.show(getFragmentManager(),"crear_est");
 
-//      Crear un nuevo fragmento y añade
-        AgregaEstudiantesFragment fragment_agrega_est = new AgregaEstudiantesFragment();
-        transaction.add(R.id.contenedor, fragment_agrega_est);
-
-//      Confirmar el cambio
-        transaction.commit();
-
-//        TODO: usar manejo de metodo bajo demanta para reutilizar get
     }
 }

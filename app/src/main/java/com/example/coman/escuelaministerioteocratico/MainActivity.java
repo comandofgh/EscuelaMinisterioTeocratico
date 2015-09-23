@@ -86,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.item_navigation_drawer_configuracion:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
+                                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                                startActivity(intent);
                                 return true;
                             case R.id.item_navigation_drawer_backup:
                                 menuItem.setChecked(true);
                                 Toast.makeText(MainActivity.this, "Launching " + menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                                startActivity(intent);
                                 return true;
                             case R.id.item_navigation_drawer_ayuda:
                                 menuItem.setChecked(true);

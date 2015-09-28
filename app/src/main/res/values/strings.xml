@@ -47,5 +47,9 @@
 
     <string name="cancelar">Cancelar</string>
     <string name="guardar">Guardar</string>
+    <string name="imagen_estudiante">imagen_estudiante</string>
+
+    <string name="eliminar_estudiante">Eliminar estudiante</string>
+
 
 </resources>

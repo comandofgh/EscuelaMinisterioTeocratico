@@ -1,33 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<util.CheckableRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="UseCompoundDrawables">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/imgEstudiante"
-        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:contentDescription="@string/imagen_estudiante" />
+        android:src="@drawable/ic_account_circle_black_48dp"
+        android:contentDescription="@string/imageview_estudiante"
+        android:focusable="false"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/viewNombre"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp" />
+        android:layout_weight="1"
+        android:layout_toEndOf="@+id/imgEstudiante"
+        android:layout_toStartOf="@+id/checkbEstudiante">
 
-    <TextView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/nombre_estudiante"
+            android:id="@+id/viewNombre"
+            android:focusable="false"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/apellido"
+            android:id="@+id/viewApellido"
+            android:layout_marginTop="10dp"
+            android:focusable="false"/>
+
+    </LinearLayout>
+    <!-- No se permite que le usuario de click sobre el checkBox, la clase CheckableRelativeLayout
+   se encargara esta asignacion para cada contacto de manera independiente-->
+
+    <CheckBox
+        android:id="@+id/checkbEstudiante"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
-        android:id="@+id/viewApellido" />
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/imgEstudiante"
+        android:clickable="false"
+        android:focusable="false"/>
 
-</LinearLayout>
+</util.CheckableRelativeLayout>

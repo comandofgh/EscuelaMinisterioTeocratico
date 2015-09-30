@@ -34,7 +34,7 @@ public class AgregarEstudiantesFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.fragment_agrega_estudiante, null);
+        View v = inflater.inflate(R.layout.fragment_agrega_estudiante,null);
         builder.setView(v);
 
         inicializarComponentesUI(v);
@@ -93,14 +93,12 @@ public class AgregarEstudiantesFragment extends DialogFragment {
                     @Override
                     public void onClick(View v) {
                         agregarEstudiante(
-                                txtNombre.getText().toString(),
-                                txtApellido.getText().toString(),
+                                (txtNombre.getText().toString().trim())+" ", //quita los espacio blancos
+                                txtApellido.getText().toString().trim(),
                                 rbtHombre.isChecked()
                         );
                         String mesg = String.format("%s ha sido agregado a la lista", txtNombre.getText());
                         Toast.makeText(v.getContext(),mesg , Toast.LENGTH_SHORT).show();
-//                        btnguardar.setEnabled(false);
-//                        limpiarCampos(); TODO: ES NECESARIO?
                         dismiss();
                     }
                 }
@@ -119,19 +117,11 @@ public class AgregarEstudiantesFragment extends DialogFragment {
     }
 
     private void agregarEstudiante(String nombre, String apellido, boolean sexo) {
-        Estudiante nuevo = new Estudiante(nombre, apellido, sexo);
+        Estudiante nuevo = new Estudiante(nombre, apellido, sexo); //elimino espacios en el texto
         Intent intent = new Intent("listaestudiantes");
         intent.putExtra("operacion", EstudianteReceiver.ESTUDIANTE_AGREGADO);
         intent.putExtra("datos", nuevo);
         getActivity().sendBroadcast(intent);
-
-    }
-
-    private void limpiarCampos() {
-        txtNombre.getText().clear();
-        txtApellido.getText().clear();
-
-        txtNombre.requestFocus();
 
     }
 

@@ -49,7 +49,12 @@
     <string name="guardar">Guardar</string>
     <string name="imagen_estudiante">imagen_estudiante</string>
 
+    <!--ListaEstudiantesFragment -->
     <string name="eliminar_estudiante">Eliminar estudiante</string>
+
+    <string name="imageview_estudiante">imageviewEstudiantes</string>
+    <string name="nombre_estudiante">Nombre</string>
+    <string name="apellido">Apellido</string>
 
 
 </resources>

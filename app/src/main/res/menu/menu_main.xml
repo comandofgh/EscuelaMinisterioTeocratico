@@ -5,10 +5,8 @@
 
     <item android:id="@+id/action_eliminar_estudiante"
         android:title="@string/eliminar_estudiante"
-        android:icon="@drawable/ic_action_action_delete"
+        android:icon="@drawable/ic_delete_white_48dp"
         app:showAsAction="ifRoom" />
-
-    <!--arrelgar menu opcion-->
 
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"

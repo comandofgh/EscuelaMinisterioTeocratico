@@ -2,11 +2,15 @@ package util;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
+
+import java.sql.SQLException;
 
 /**
  * Esta clase es utilizada para administrar la creacion y actualizacion de la base de datos.
@@ -26,11 +30,68 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+
+    /**
+     * Metodo invocado cuando la base de datos es creada, Usualmente se hacen llamadas a los metodos
+     * createTable para crear las tablas que almacenaran los datos.
+     *
+     * @param db
+     * @param source
+     */
     @Override
     public void onCreate(SQLiteDatabase db, ConnectionSource source) {
-        log.i(DatabaseHelper.class.getSimpleName(), "onCreate()");
-        //TODO; AQUI QUEDE
+        try {
+            Log.i(DatabaseHelper.class.getSimpleName(), "onCreate()");
+            TableUtils.clearTable(source, Estudiante.class);
+        } catch (SQLException ex) {
+            Log.e(DatabaseHelper.class.getSimpleName(), "Imposible crear la base de datos", ex);
+            throw new RuntimeException(ex);
+        }
+    }
 
+    /**
+     * @param db
+     * @param source
+     * @param oldVersion
+     * @param newVersion
+     */
+    @Override
+    public void onUpgrade(SQLiteDatabase db, ConnectionSource source, int oldVersion, int newVersion) {
+        try {
+            Log.i(DatabaseHelper.class.getSimpleName(), "onUpgrade()");
+            TableUtils.dropTable(source, Estudiante.class, true);
+            //Después de eliminar las tablas anteriores, creamos nuevamente la base de datos
+            onCreate(db, source);
+        } catch (SQLException e) {
+            Log.e(DatabaseHelper.class.getSimpleName(), "Imposible eliminar la base de datos", e);
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public Dao<Estudiante, Integer> getEstudianteDAO() throws SQLException {
+        if (estudianteDAO == null) estudianteDAO = getDao(Estudiante.class);
+
+        return estudianteDAO;
+    }
+
+    /**
+     * Obtiene la version RuntimeException del objeto DAO para la entidad Estudiante.
+     * Los objetos RuntimeExceptionDao únicamente arrojan excepciones de tipo RuntimeException
+     *
+     * @return
+     */
+    public RuntimeExceptionDao<Estudiante, Integer> getEstudianteRuntimeDAO() {
+        if (estudianteRuntimeDAO == null)
+            estudianteRuntimeDAO = getRuntimeExceptionDao(Estudiante.class);
+        return estudianteRuntimeDAO;
+    }
+
+    @Override
+    public void close() {
+        super.close();
+        estudianteDAO = null; //nos aseguramos de cerrar la conexiones de los objetos Dao
+        estudianteRuntimeDAO = null;
     }
 }
 

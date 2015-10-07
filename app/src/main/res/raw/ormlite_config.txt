@@ -1,0 +1,25 @@
+#
+# generated on 2015/10/07 04:55:04
+#
+# --table-start--
+dataClass=util.Estudiante
+tableName=Estudiante
+# --table-fields-start--
+# --field-start--
+fieldName=id_estudiante
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=nombre
+canBeNull=false
+indexName=Estudiante_nombre_idx
+# --field-end--
+# --field-start--
+fieldName=apellido
+# --field-end--
+# --field-start--
+fieldName=sexo
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

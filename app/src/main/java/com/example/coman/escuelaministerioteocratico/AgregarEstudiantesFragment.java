@@ -93,6 +93,8 @@ public class AgregarEstudiantesFragment extends DialogFragment {
                     @Override
                     public void onClick(View v) {
                         agregarEstudiante(
+
+                                //TODO: agregar metoo converitr nombre y apellido en mayusculas
                                 (txtNombre.getText().toString().trim())+" ", //quita los espacio blancos
                                 txtApellido.getText().toString().trim(),
                                 rbtHombre.isChecked()

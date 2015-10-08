@@ -14,10 +14,10 @@ public class Estudiante implements Serializable{
     @DatabaseField(index = true, canBeNull = false)
     private String nombre;
 
-    @DatabaseField
+    @DatabaseField(canBeNull = false)
     private String apellido;
 
-    @DatabaseField
+    @DatabaseField(canBeNull = false)
     private boolean sexo;
 
 

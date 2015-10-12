@@ -1,5 +1,6 @@
 package com.example.coman.escuelaministerioteocratico;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -14,11 +15,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.j256.ormlite.dao.RuntimeExceptionDao;
+
 import java.util.ArrayList;
 
+import util.DatabaseHelper;
 import util.Estudiante;
 import util.EstudianteListAdapter;
 import util.EstudianteReceiver;
+import util.OrmLiteBaseActivity1;
 
 public class ListaEstudiantesFragment extends Fragment {
 
@@ -37,7 +42,7 @@ public class ListaEstudiantesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        receiver = new EstudianteReceiver(adapter);
+        receiver = new EstudianteReceiver(adapter, getOrmLiteBaseActivity());
         getActivity().registerReceiver(receiver, new IntentFilter("listaestudiantes"));
     }
 
@@ -50,12 +55,24 @@ public class ListaEstudiantesFragment extends Fragment {
     private void inicializarComponentes(View v) {
         estudiantListview = (ListView) v.findViewById(R.id.listViewEstudiantes);
         adapter = new EstudianteListAdapter(getActivity(), new ArrayList<Estudiante>());
+        OrmLiteBaseActivity1<DatabaseHelper> activity = getOrmLiteBaseActivity();
+        if (activity != null) {
+            DatabaseHelper helper = activity.getHelper();
+            RuntimeExceptionDao<Estudiante, Integer> dao = helper.getEstudianteRuntimeDAO();
+            adapter.addAll(dao.queryForAll());
+        }
         //Notificaciones para el adapter y actualize listview
         adapter.setNotifyOnChange(true);
         estudiantListview.setAdapter(adapter);
 
     }
 
+    private OrmLiteBaseActivity1<DatabaseHelper> getOrmLiteBaseActivity() {
+        Activity activity = getActivity();
+        if (activity instanceof OrmLiteBaseActivity1)
+            return (OrmLiteBaseActivity1<DatabaseHelper>) activity;
+        return null;
+    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);

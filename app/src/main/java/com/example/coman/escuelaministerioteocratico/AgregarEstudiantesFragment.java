@@ -119,7 +119,7 @@ public class AgregarEstudiantesFragment extends DialogFragment {
     }
 
     private void agregarEstudiante(String nombre, String apellido, boolean sexo) {
-        Estudiante nuevo = new Estudiante(nombre, apellido, sexo); //elimino espacios en el texto
+        Estudiante nuevo = new Estudiante(nombre, apellido, sexo);
         Intent intent = new Intent("listaestudiantes");
         intent.putExtra("operacion", EstudianteReceiver.ESTUDIANTE_AGREGADO);
         intent.putExtra("datos", nuevo);

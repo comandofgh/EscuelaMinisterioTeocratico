@@ -2,7 +2,6 @@ package util;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -24,12 +23,12 @@ import com.j256.ormlite.support.ConnectionSource;
  *
  * @author graywatson, kevingalligan
  */
-public abstract class OrmLiteBaseActivity<H extends OrmLiteSqliteOpenHelper> extends AppCompatActivity {
+public abstract class OrmLiteBaseActivity1<H extends OrmLiteSqliteOpenHelper> extends AppCompatActivity {
 
     private volatile H helper;
     private volatile boolean created = false;
     private volatile boolean destroyed = false;
-    private static Logger logger = LoggerFactory.getLogger(OrmLiteBaseActivity.class);
+    private static Logger logger = LoggerFactory.getLogger(OrmLiteBaseActivity1.class);
 
     /**
      * Get a helper for this action.
@@ -57,22 +56,13 @@ public abstract class OrmLiteBaseActivity<H extends OrmLiteSqliteOpenHelper> ext
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+    protected void onCreate(Bundle savedInstanceState) {
         if (helper == null) {
             helper = getHelperInternal(this);
             created = true;
         }
-        super.onCreate(savedInstanceState, persistentState);
+        super.onCreate(savedInstanceState);
     }
-
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        if (helper == null) {
-//            helper = getHelperInternal(this);
-//            created = true;
-//        }
-//        super.onCreate(savedInstanceState);
-//    }
 
     @Override
     protected void onDestroy() {

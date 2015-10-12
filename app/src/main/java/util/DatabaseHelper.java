@@ -30,7 +30,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION, R.raw.ormlite_config);
     }
 
-
     /**
      * Metodo invocado cuando la base de datos es creada, Usualmente se hacen llamadas a los metodos
      * createTable para crear las tablas que almacenaran los datos.
@@ -42,7 +41,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase db, ConnectionSource source) {
         try {
             Log.i(DatabaseHelper.class.getSimpleName(), "onCreate()");
-            TableUtils.clearTable(source, Estudiante.class);
+            TableUtils.createTable(source, Estudiante.class);
         } catch (SQLException ex) {
             Log.e(DatabaseHelper.class.getSimpleName(), "Imposible crear la base de datos", ex);
             throw new RuntimeException(ex);
@@ -50,6 +49,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     /**
+     *Este metodo es invocado cuando la aplicacion es actualizada y tiene un numero de version
+     * superior. Permite el ajuste a los mdatos para alinearse con la nueva version
      * @param db
      * @param source
      * @param oldVersion
@@ -69,16 +70,20 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     }
 
+    /**
+     * obtiene el objero Data Access Objet (DAO) para la entidad Estudiante
+     *
+     * @return
+     * @throws SQLException
+     */
     public Dao<Estudiante, Integer> getEstudianteDAO() throws SQLException {
         if (estudianteDAO == null) estudianteDAO = getDao(Estudiante.class);
-
         return estudianteDAO;
     }
 
     /**
      * Obtiene la version RuntimeException del objeto DAO para la entidad Estudiante.
      * Los objetos RuntimeExceptionDao únicamente arrojan excepciones de tipo RuntimeException
-     *
      * @return
      */
     public RuntimeExceptionDao<Estudiante, Integer> getEstudianteRuntimeDAO() {

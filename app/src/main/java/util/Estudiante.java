@@ -5,21 +5,20 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 
-@DatabaseTable(tableName = "Estudiante")
+@DatabaseTable(tableName = "estudiante")
 public class Estudiante implements Serializable{
 
     @DatabaseField(generatedId = true)
-    private int id_estudiante;  //Primary Key
+    private int id; //Primari key
 
     @DatabaseField(index = true, canBeNull = false)
     private String nombre;
 
-    @DatabaseField(canBeNull = false)
+    @DatabaseField
     private String apellido;
 
-    @DatabaseField(canBeNull = false)
+    @DatabaseField
     private boolean sexo;
-
 
     /**
      * El motor de ORMlite requiere este constructor vacío para poder instanciar objetos de
@@ -38,8 +37,8 @@ public class Estudiante implements Serializable{
     }
 
     //<editor-fold desc="GETTER METHODS">
-    public int getId_estudiante() {
-        return id_estudiante;
+    public int getId() {
+        return id;
     }
 
     public boolean isSexo() {

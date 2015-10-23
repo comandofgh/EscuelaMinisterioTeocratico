@@ -1,6 +1,5 @@
 package com.example.coman.escuelaministerioteocratico;
 
-
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -20,14 +19,13 @@ import util.Estudiante;
 import util.EstudianteReceiver;
 import util.TextChangedListener;
 
-public class AgregarEstudiantesFragment extends DialogFragment {
+public class AgregarEstudiantesFragment extends DialogFragment implements View.OnClickListener {
 
     private EditText txtNombre, txtApellido;
     private RadioButton rbtHombre;
     private Button btnguardar;
 
     private List<Estudiante> estudiante = new ArrayList<Estudiante>();
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -42,13 +40,16 @@ public class AgregarEstudiantesFragment extends DialogFragment {
         return builder.create();
     }
 
-    private void inicializarComponentesUI(View v) {
+    private void inicializarComponentesUI(View v){
 
         txtNombre = (EditText) v.findViewById(R.id.etxtnombre);
         txtApellido = (EditText) v.findViewById(R.id.etxtapellido);
         rbtHombre = (RadioButton) v.findViewById(R.id.rbthombre);
-        Button btncancelar = (Button) v.findViewById(R.id.btncancelaragregaest);
         btnguardar = (Button) v.findViewById(R.id.btnguardaragregaest);
+        Button btncancelar = (Button) v.findViewById(R.id.btncancelaragregaest);
+
+        btnguardar.setOnClickListener(this);
+        btncancelar.setOnClickListener(this);
 
         rbtHombre.setChecked(true);
         btnguardar.setEnabled(false);
@@ -87,35 +88,6 @@ public class AgregarEstudiantesFragment extends DialogFragment {
         });
         //</editor-fold>
 
-        //<editor-fold desc="onClickListener">
-        btnguardar.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        agregarEstudiante(
-
-                                //TODO: agregar metoo converitr nombre y apellido en mayusculas
-                                (txtNombre.getText().toString().trim())+" ", //quita los espacio blancos
-                                txtApellido.getText().toString().trim(),
-                                rbtHombre.isChecked()
-                        );
-                        String mesg = String.format("%s ha sido agregado a la lista", txtNombre.getText());
-                        Toast.makeText(v.getContext(),mesg , Toast.LENGTH_SHORT).show();
-                        dismiss();
-                    }
-                }
-        );
-
-        btncancelar.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dismiss();
-                    }
-                }
-        );
-        //</editor-fold>
-
     }
 
     private void agregarEstudiante(String nombre, String apellido, boolean sexo) {
@@ -127,4 +99,23 @@ public class AgregarEstudiantesFragment extends DialogFragment {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnguardaragregaest:
+                agregarEstudiante(
+                        (TextChangedListener.convertirAmayuscula(txtNombre.getText()) + " "),
+                        TextChangedListener.convertirAmayuscula(txtApellido.getText()),
+                        rbtHombre.isChecked());
+
+                String mesg = String.format("%s ha sido agregado a la lista", txtNombre.getText());
+                Toast.makeText(v.getContext(), mesg, Toast.LENGTH_SHORT).show();
+                dismiss();
+                break;
+            case R.id.btncancelaragregaest:
+                dismiss();
+                break;
+        }
+
+    }
 }

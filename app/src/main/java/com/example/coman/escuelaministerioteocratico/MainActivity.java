@@ -1,7 +1,6 @@
 package com.example.coman.escuelaministerioteocratico;
 
 import android.app.DialogFragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,10 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import util.DatabaseHelper;
 import util.OrmLiteBaseActivity1;
 
-public class MainActivity extends OrmLiteBaseActivity1<DatabaseHelper> {
+public class MainActivity extends OrmLiteBaseActivity1<DatabaseHelper> implements View.OnClickListener {
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -32,7 +33,10 @@ public class MainActivity extends OrmLiteBaseActivity1<DatabaseHelper> {
 
     private void inicializarUI() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        FloatingActionButton fba = (FloatingActionButton) findViewById(R.id.fab);
+
         setSupportActionBar(toolbar);
+        fba.setOnClickListener(this);
 
         actionBar = getSupportActionBar();
         assert actionBar != null; //esto arregla nullexception
@@ -77,12 +81,6 @@ public class MainActivity extends OrmLiteBaseActivity1<DatabaseHelper> {
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-                            case R.id.item_navigation_drawer_configuracion:
-                                menuItem.setChecked(true);
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                                startActivity(intent);
-                                return true;
                             case R.id.item_navigation_drawer_backup:
                                 menuItem.setChecked(true);
                                 Toast.makeText(MainActivity.this, "Launching " + menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
@@ -104,12 +102,17 @@ public class MainActivity extends OrmLiteBaseActivity1<DatabaseHelper> {
                 });
     }
 
-    public void onAgregarEst(View view) {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.fab:
+                // creamos instancia de AgregarEstudiantesFragment()
+                DialogFragment newFragment = new AgregarEstudiantesFragment();
+                // mostramos
+                newFragment.show(getFragmentManager(),"crear_est");
+                break;
+        }
 
-//      creamos instancia de AgregarEstudiantesFragment()
-        DialogFragment newFragment = new AgregarEstudiantesFragment();
-//      mostramos
-        newFragment.show(getFragmentManager(),"crear_est");
 
     }
 }

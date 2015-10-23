@@ -15,8 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.j256.ormlite.stmt.QueryBuilder;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import util.DatabaseHelper;
@@ -34,7 +35,11 @@ public class ListaEstudiantesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_lista_estudiantes, container, false);
-        inicializarComponentes(v);
+        try {
+            inicializarComponentes(v);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         setHasOptionsMenu(true);//Habilita el ActionBar de este fragment
         return v;
     }
@@ -44,6 +49,7 @@ public class ListaEstudiantesFragment extends Fragment {
         super.onResume();
         receiver = new EstudianteReceiver(adapter, getOrmLiteBaseActivity());
         getActivity().registerReceiver(receiver, new IntentFilter("listaestudiantes"));
+
     }
 
     @Override
@@ -52,19 +58,23 @@ public class ListaEstudiantesFragment extends Fragment {
         getActivity().unregisterReceiver(receiver);
     }
 
-    private void inicializarComponentes(View v) {
+    private void inicializarComponentes(View v) throws SQLException {
         estudiantListview = (ListView) v.findViewById(R.id.listViewEstudiantes);
         adapter = new EstudianteListAdapter(getActivity(), new ArrayList<Estudiante>());
         OrmLiteBaseActivity1<DatabaseHelper> activity = getOrmLiteBaseActivity();
         if (activity != null) {
             DatabaseHelper helper = activity.getHelper();
-            RuntimeExceptionDao<Estudiante, Integer> dao = helper.getEstudianteRuntimeDAO();
-            adapter.addAll(dao.queryForAll());
-        }
-        //Notificaciones para el adapter y actualize listview
-        adapter.setNotifyOnChange(true);
-        estudiantListview.setAdapter(adapter);
+            QueryBuilder<Estudiante, Integer> dao = helper.getEstudianteRuntimeDAO().queryBuilder(); //construimos un Builder
+            dao.orderBy("nombre", true); //ordenamos alfabeticamente por nombre
+            dao.orderBy("apellido", true); //TODO: arreglar ordernar por apellido
+            adapter.addAll(dao.query());
 
+//  Notificaciones para el adapter y actualize listview
+            adapter.setNotifyOnChange(true);
+            estudiantListview.setFastScrollEnabled(true);
+            estudiantListview.setAdapter(adapter);
+
+        }
     }
 
     private OrmLiteBaseActivity1<DatabaseHelper> getOrmLiteBaseActivity() {
@@ -73,6 +83,7 @@ public class ListaEstudiantesFragment extends Fragment {
             return (OrmLiteBaseActivity1<DatabaseHelper>) activity;
         return null;
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);

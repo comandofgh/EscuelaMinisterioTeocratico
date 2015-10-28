@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="@bool/fitsSystemWindows"
-    android:tag="phone">
+    android:tag="tablet">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,6 @@
     </LinearLayout>
 
     <FrameLayout
-        xmlns:fab="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/status_bar_height">
@@ -40,33 +39,30 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ToolbarTheme" />
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?actionBarSize"
             android:baselineAligned="false">
 
             <fragment
-                android:layout_width="0dp"
+                android:layout_width="400dp"
                 android:layout_height="match_parent"
-                android:name="com.example.coman.escuelaministerioteocratico.ListaEstudiantesFragment"
-                android:id="@+id/fragment"
-                tools:layout="@layout/fragment_lista_estudiantes"
-                android:layout_weight="1" />
-        </LinearLayout>
+                android:name="com.example.coman.escuelaministerioteocratico.AgregarEstudiantesFragment"
+                android:id="@+id/fragment2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                tools:layout="@layout/fragment_agrega_estudiante" />
 
-        <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:src="@mipmap/ic_action_content_new"
-            fab:fab_colorNormal="@color/md_green_500"
-            fab:fab_colorPressed="@color/md_green_500_25"
-            android:onClick="onAgregarEst"
-            android:layout_marginBottom="45dp"
-            android:layout_marginEnd="35dp" />
+            <fragment
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:name="com.example.coman.escuelaministerioteocratico.ListaEstudiantesFragment"
+                android:id="@+id/fragment3"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/fragment2"
+                tools:layout="@layout/fragment_lista_estudiantes" />
+        </RelativeLayout>
 
     </FrameLayout>
 

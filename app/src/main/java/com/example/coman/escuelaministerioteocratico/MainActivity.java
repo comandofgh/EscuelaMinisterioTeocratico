@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -32,25 +33,34 @@ public class MainActivity extends OrmLiteBaseActivity1<DatabaseHelper> implement
     }
 
     private void inicializarUI() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        FloatingActionButton fba = (FloatingActionButton) findViewById(R.id.fab);
+        //Comprobamos cual layout se esta cargando segun el tamano de la pantalla
+        View view = findViewById(R.id.navigation_drawer_layout);
+        String viewTag = String.valueOf(view.getTag());
+        Log.d(getClass().getSimpleName(),String.format("Layout:%s", viewTag));
 
-        setSupportActionBar(toolbar);
-        fba.setOnClickListener(this);
+        if (viewTag.equals("phone")) {
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            FloatingActionButton fba = (FloatingActionButton) findViewById(R.id.fab);
 
-        actionBar = getSupportActionBar();
-        assert actionBar != null; //esto arregla nullexception
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+            setSupportActionBar(toolbar);
+            fba.setOnClickListener(this);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
+            actionBar = getSupportActionBar();
+            assert actionBar != null; //esto arregla nullexception
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+            actionBar.setDisplayHomeAsUpEnabled(true);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        if (navigationView != null) {
+            drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
+
+            NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+            if (navigationView != null) {
+                setupNavigationDrawerContent(navigationView);
+            }
+
             setupNavigationDrawerContent(navigationView);
         }
 
-        setupNavigationDrawerContent(navigationView);
+
     }
 
     @Override

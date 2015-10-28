@@ -1,7 +1,9 @@
 package com.example.coman.escuelaministerioteocratico;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -66,12 +68,11 @@ public class ListaEstudiantesFragment extends Fragment {
             DatabaseHelper helper = activity.getHelper();
             QueryBuilder<Estudiante, Integer> dao = helper.getEstudianteRuntimeDAO().queryBuilder(); //construimos un Builder
             dao.orderBy("nombre", true); //ordenamos alfabeticamente por nombre
-            dao.orderBy("apellido", true); //TODO: arreglar ordernar por apellido
             adapter.addAll(dao.query());
 
 //  Notificaciones para el adapter y actualize listview
             adapter.setNotifyOnChange(true);
-            estudiantListview.setFastScrollEnabled(true);
+            estudiantListview.setFastScrollEnabled(true);  //TODO:deseleccionar checbox
             estudiantListview.setAdapter(adapter);
 
         }
@@ -91,9 +92,27 @@ public class ListaEstudiantesFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.action_eliminar_estudiante: eliminarEstudiante(item); return true;
-            default: return super.onOptionsItemSelected(item);
+            case R.id.action_eliminar_estudiante:
+                String mensaje = "Esta seguro de eliminar Estudiante seleccionado?";
+                confirmarAccion(item, mensaje);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void confirmarAccion(final MenuItem item, String mensaje) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setIcon(R.drawable.ic_action_warning).setTitle("Confirmar operacion");
+        builder.setMessage(mensaje);
+        builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                eliminarEstudiante(item);
+            }
+        });
+        builder.setNegativeButton("NO", null);
+        builder.show();
     }
 
     private void eliminarEstudiante(MenuItem item) {
